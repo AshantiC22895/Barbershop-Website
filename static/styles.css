@@ -1,0 +1,319 @@
+/* =========================
+   RESET & BASE STYLES
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: black;
+    color: white;
+    overflow-y: scroll;
+    cursor: url("{{ url_for('static', filename='images/clipper-cursor.png') }}"), auto;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero {
+    height: 100vh;
+    background: linear-gradient(-12deg, red 33%, white 33%, white 66%, black 66%);
+    background-size: 300% 300%;
+    animation: backgroundSlide 6s ease-in-out infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Logo Text */
+.logo-text h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeBounce 30s ease-out 0.5s forwards;
+}
+
+.part1 { color: red; }
+.part2 { color: black; }
+.part3 {
+    color: blue;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Address */
+.logo-text h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: black;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInAddress 2s ease-out 2.5s forwards;
+}
+
+.class1, .class2, .class3 {
+    color: black;
+}
+
+/* =========================
+   BARBERS SECTION
+========================= */
+.barbers-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 60px 20px;
+    
+}
+
+.barber {
+    text-align: center;
+    max-width: 200px;
+}
+
+.barber img {
+    width: 220px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10%;
+    border: 2px solid rgb(134, 150, 89);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+    transition: transform 0.3s;
+}
+
+.barber img:hover {
+    transform: scale(1.05);
+}
+
+.barber h3 {
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #f1efef;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes backgroundSlide {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+@keyframes fadeBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInAddress {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === Navigation Bar === */
+.navbar {
+    width: 100%;
+    background: #111;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: red;
+    left: 0;
+    bottom: 0;
+    transition: 0.3s ease;
+}
+
+.navbar ul li a:hover::after {
+    width: 100%;
+}
+
+.navbar ul li a:hover {
+    color: red;
+}
+
+/* === Booking Form === */
+.booking-form {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.booking-form input,
+.booking-form button {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.booking-form input {
+    background: #333;
+    color: white;
+}
+
+.booking-form input::placeholder {
+    color: #bbb;
+}
+
+.booking-form button {
+    background: red;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.booking-form button:hover {
+    background: #cc0000;
+}
+
+.services-section {
+    padding: 2rem;
+}
+
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.service-info {
+    flex: 1;
+}
+
+.service-name {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.service-price, .service-duration {
+    margin-right: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.book-button {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.book-button:hover {
+    background-color: #006666;
+}
+
+.services-section {
+    padding: 2rem;
+}
+
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.service-info {
+    flex: 1;
+}
+
+.service-name {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.service-price, .service-duration {
+    margin-right: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.book-button {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.book-button:hover {
+    background-color: #006666;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Headz Up Barber Shop – Hattiesburg, Mississippi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" style="display: none;">
+
+        <!-- Navigation -->
+        <nav class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/barbers">Barbers</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/book">Book</a></li>
+    </ul>
+</nav>
+
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="logo-text">
+                <h1>
+                    <span class="part1">Headz</span>
+                    <span class="part2">Up</span>
+                    <span class="part3">Barber Shop</span>
+                </h1>
+                <h2>
+                    <span class="class1">2509 W 4th St,</span>
+                    <span class="class2"> Hattiesburg, MS</span>
+                    <span class="class3"> 39401</span>
+                </h2>
+            </div>
+        </div>
+
+        <!-- Barbers Section -->
+        <section id="barbers" class="barbers-section">
+            <div class="barber">
+                <img src="{{ url_for('static', filename='barber.jpg') }}" alt="Mr. J">
+                <h3>Mr. J</h3>
+            </div>
+            <div class="barber">
+                <img src="{{ url_for('static', filename='jarvis.jpg') }}" alt="Jarvis “Fade King”">
+                <h3>Jarvis “Fade King”</h3>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+    <h2>Our Services</h2>
+    <div class="service-list">
+        {% set services = [
+            {"name": "KIDS Cutz (Age 1–12)", "price": 25, "duration": "30min"},
+            {"name": "Beard trim", "price": 20, "duration": "15min"},
+            {"name": "Haircut", "price": 30, "duration": "30min"},
+            {"name": "Haircut & Shave", "price": 35, "duration": "30min"},
+            {"name": "Line", "price": 20, "duration": "15min"},
+            {"name": "Line and Shave", "price": 25, "duration": "30min"},
+            {"name": "Senior Cut", "price": 25, "duration": "30min"}
+        ] %}
+
+        {% for service in services %}
+        <div class="service-item">
+            <div class="service-info">
+                <span class="service-name">{{ service.name }}</span>
+                <span class="service-price">${{ "%.2f"|format(service.price) }}</span>
+                <span class="service-duration">{{ service.duration }}</span>
+            </div>
+            <form method="GET" action="/book">
+                <input type="hidden" name="service" value="{{ service.name }}">
+                <button class="book-button" type="submit">Book</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+        <!-- Booking Form -->
+        <section id="booking" class="booking-form-section">
+            <h2>Book an Appointment</h2>
+            <form action="/book" method="POST" class="booking-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="datetime-local" name="appointment_time" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+
+        <!-- Google Map -->
+        <section id="contact">
+            <h2>Find Us</h2>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=..." 
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </section>
+
+    </div>
+
+    <!-- Loader Script -->
+    <script>
+        window.addEventListener("load", function () {
+            document.getElementById("loader-wrapper").style.display = "none";
+            document.querySelector(".content").style.display = "block";
+        });
+    </script>
+    <section id="services" class="services-section">
+    <h2>Our Services</h2>
+    <div class="service-list">
+        {% set services = [
+            {"name": "KIDS Cutz (Age 1–12)", "price": 25, "duration": "30min"},
+            {"name": "Beard trim", "price": 20, "duration": "15min"},
+            {"name": "Haircut", "price": 30, "duration": "30min"},
+            {"name": "Haircut & Shave", "price": 35, "duration": "30min"},
+            {"name": "Line", "price": 20, "duration": "15min"},
+            {"name": "Line and Shave", "price": 25, "duration": "30min"},
+            {"name": "Senior Cut", "price": 25, "duration": "30min"}
+        ] %}
+        
+        {% for service in services %}
+        <div class="service-item">
+            <div class="service-info">
+                <span class="service-name">{{ service.name }}</span>
+                <span class="service-price">${{ "%.2f"|format(service.price) }}</span>
+                <span class="service-duration">{{ service.duration }}</span>
+            </div>
+            <form method="GET" action="/book">
+                <input type="hidden" name="service" value="{{ service.name }}">
+                <button class="book-button" type="submit">Book</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+</body>
+</html>

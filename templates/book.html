@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment – Headz Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('{{ url_for("static", filename="images/barbershop-bg.jpg") }}') center/cover no-repeat;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .background-text {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            color: rgba(255, 255, 255, 0.07);
+            font-weight: 900;
+            text-align: center;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .booking-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            max-width: 500px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f1c40f;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input, select {
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            background-color: #f1c40f;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d4ac0d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-text">LET'S GET THIS HAIRCUT</div>
+
+    <div class="booking-container">
+        <h1>Book an Appointment</h1>
+        <form method="POST" action="/book">
+            <input type="text" name="name" placeholder="Your Name" required>
+
+            <select name="service" required>
+                <option value="" disabled selected>Select Service</option>
+                {% for service in services %}
+                    <option value="{{ service }}" {% if service == service_selected %}selected{% endif %}>{{ service }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="barber" required>
+                <option value="" disabled selected>Select Barber</option>
+                {% for barber in barbers %}
+                    <option value="{{ barber }}">{{ barber }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="datetime-local" name="appointment_time" required>
+
+            <button type="submit">Book Now</button>
+        </form>
+
+        {% if slots %}
+            <h3>Available Time Slots:</h3>
+            <ul style="padding-left: 20px;">
+                {% for time in slots %}
+                    <li>{{ time }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</body>
+</html>
+
